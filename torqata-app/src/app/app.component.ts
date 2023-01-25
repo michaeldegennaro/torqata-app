@@ -56,21 +56,9 @@ export class AppComponent {
     }
   ]
 
-  getFilterObject(fullObj, key) {
-    const uniqChk = [];
-    fullObj.filter((obj) => {
-      if (!uniqChk.includes(obj[key])) {
-        uniqChk.push(obj[key]);
-      }
-      return obj;
-    });
-    return uniqChk;
-  }
-
   getNet() {
     this.api.getNet().subscribe(
       (data) => {
-        console.log(data)
         this.dataSource.data = data;
         this.setPie(data)
       }
@@ -112,7 +100,6 @@ export class AppComponent {
     let filterFunction = function (data , filter: string): boolean {
       let searchTerms = JSON.parse(filter);
       let isFilterSet = false;
-      console.log(searchTerms)
       for (const col in searchTerms) {
         if (searchTerms[col].toString() !== '') {
           isFilterSet = true;
@@ -121,7 +108,6 @@ export class AppComponent {
         }
       }
 
-      console.log(searchTerms);
 
       let nameSearch = () => {
         let found = false;
